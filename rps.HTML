@@ -8,16 +8,46 @@
     function round(computerSelection,playerSelection){
         playerSelection = playerSelection.toLowerCase();
         computerSelection = computerSelection.toLowerCase();
+        var winner = '0';
         var outcome = "Whoops"
         if(playerSelection == computerSelection ){
             outcome = "Tie Game! You both picked " + playerSelection; 
         }else if((playerSelection == 'rock' && computerSelection == 'scissors')||(playerSelection=='paper'&& computerSelection=='rock')||(playerSelection=='scissors'&&computerSelection=='paper')){
             outcome = "Congrats! You win!" + playerSelection + " beats " + computerSelection;
+            winner = '1';
         }else{
             outcome = "You lose!" + playerSelection + " is beat by " + computerSelection;
+            winner = '2';
         }
-        return outcome;
+        console.log(outcome);
+        return winner;
     }
 
-    console.log(round(computerPlay(),'ROCK'));
+    function game(){
+        var computerScore = 0;
+        var playerScore = 0;
+        for(var i=0; i<5;i++){
+            var winner = round(computerPlay(), prompt());
+            switch(winner){
+                case '1':
+                    playerScore++;
+                    break;
+                case '2':
+                    computerScore++;
+                    break;
+            }
+            console.log("Score is: " + playerScore + "-" + computerScore);
+        }
+        var scoreBoard = playerScore + "-" + computerScore;
+        if(playerScore>computerScore){
+            return "You won!" + scoreBoard;
+        }else if (playerScore < computerScore){
+            return "You lost." + scoreBoard;
+        }else{
+            return "Game was tied"+ scoreBoard;
+        }
+
+    }
+
+    console.log(game());
 </script>
