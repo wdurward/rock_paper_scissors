@@ -1,0 +1,23 @@
+<script>
+    function computerPlay(){
+        var choiceList = ['Rock','Paper','Scissors'];
+        var computerChoice=Math.floor(Math.random()*3);
+        return choiceList[computerChoice];
+    }
+
+    function round(computerSelection,playerSelection){
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+        var outcome = "Whoops"
+        if(playerSelection == computerSelection ){
+            outcome = "Tie Game! You both picked " + playerSelection; 
+        }else if((playerSelection == 'rock' && computerSelection == 'scissors')||(playerSelection=='paper'&& computerSelection=='rock')||(playerSelection=='scissors'&&computerSelection=='paper')){
+            outcome = "Congrats! You win!" + playerSelection + " beats " + computerSelection;
+        }else{
+            outcome = "You lose!" + playerSelection + " is beat by " + computerSelection;
+        }
+        return outcome;
+    }
+
+    console.log(round(computerPlay(),'ROCK'));
+</script>
