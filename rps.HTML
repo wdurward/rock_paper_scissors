@@ -1,4 +1,29 @@
+<!DOCTYPE html>
+<html>
+<header> Warren's RPS</header>
+    <body>
+        <button id = 'Rock'>Rock</button>
+        <button id = 'Paper'>Paper</button>
+        <button id = 'Scissors'>Scissors</button>
+        <p id = results>Let's Play!</p>
+        <p id = scoreBoard>Player : 0 - Computer - 0</p>
+    
+
+
+
+    </body>
 <script>
+
+    const buttons = document.querySelectorAll('button');
+    var playerScore = 0;
+    var computerScore = 0;
+
+    buttons.forEach((button) =>{
+        button.addEventListener('click', (e) =>{
+            round(computerPlay(), button.id);
+        });
+    });
+
     function computerPlay(){
         var choiceList = ['Rock','Paper','Scissors'];
         var computerChoice=Math.floor(Math.random()*3);
@@ -6,48 +31,24 @@
     }
 
     function round(computerSelection,playerSelection){
+        const score = document.querySelector('#scoreBoard');
+        const results = document.querySelector('#results');
         playerSelection = playerSelection.toLowerCase();
         computerSelection = computerSelection.toLowerCase();
-        var winner = '0';
-        var outcome = "Whoops"
+        var outcome = ""
         if(playerSelection == computerSelection ){
             outcome = "Tie Game! You both picked " + playerSelection; 
         }else if((playerSelection == 'rock' && computerSelection == 'scissors')||(playerSelection=='paper'&& computerSelection=='rock')||(playerSelection=='scissors'&&computerSelection=='paper')){
             outcome = "Congrats! You win!" + playerSelection + " beats " + computerSelection;
-            winner = '1';
+            playerScore++;
+
         }else{
             outcome = "You lose!" + playerSelection + " is beat by " + computerSelection;
-            winner = '2';
+            computerScore ++;
         }
-        console.log(outcome);
-        return winner;
+        results.textContent= outcome;
+        score.textContent = `Player score: ${playerScore} - Computer Score: ${computerScore}`;
     }
 
-    function game(){
-        var computerScore = 0;
-        var playerScore = 0;
-        for(var i=0; i<5;i++){
-            var winner = round(computerPlay(), prompt());
-            switch(winner){
-                case '1':
-                    playerScore++;
-                    break;
-                case '2':
-                    computerScore++;
-                    break;
-            }
-            console.log("Score is: " + playerScore + "-" + computerScore);
-        }
-        var scoreBoard = playerScore + "-" + computerScore;
-        if(playerScore>computerScore){
-            return "You won!" + scoreBoard;
-        }else if (playerScore < computerScore){
-            return "You lost." + scoreBoard;
-        }else{
-            return "Game was tied"+ scoreBoard;
-        }
-
-    }
-
-    console.log(game());
 </script>
+</html>
